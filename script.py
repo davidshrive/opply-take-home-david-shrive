@@ -32,10 +32,12 @@ for inputCompany in inputData:
 
 	labels = "unknown"
 	if "labels" in keys:
-		labels = inputCompany["labels"].split(";") 
+		labels = inputCompany["labels"]
 	elif "keywords" in keys:
-		labels = inputCompany["keywords"].split(";") 
-	company["description"] =  description
+		labels = inputCompany["keywords"]
+	elif "tags" in keys:
+		labels = inputCompany["tags"]
+	company["labels"] = list(map(lambda label:label.strip(), labels.split(";")))
 
 	website = "unknown"
 	if "website" in keys:
