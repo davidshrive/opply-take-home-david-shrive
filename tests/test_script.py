@@ -18,7 +18,7 @@ def test_calc_score_no_product():
     assert calc_score(testCompany, ["label1"]) == 0
 
 def test_calc_score_no_labels():
-    testCompany = json.loads('{"products":[{"name":"cake","ingredients":["flour","sugar","eggs"]},{"name":"biscuits"},{"name":"chips"}]}')
+    testCompany = json.loads('{"products":{"cream":["milk","fat","emulsifier"]}}')
     assert calc_score(testCompany, ["label1"]) == 0
 
 def test_calc_score_nothing():
@@ -26,9 +26,30 @@ def test_calc_score_nothing():
     assert calc_score(testCompany, ["label1"]) == 0
 
 def test_calc_score_ingredient_match():
-    testCompany = json.loads('{"products":[{"name":"cake","ingredients":["flour","sugar","eggs"]},{"name":"biscuits"},{"name":"chips"}]}')
-    assert calc_score(testCompany, ["eggs"]) == 5
+    testCompany = json.loads('{"products":{"cream":["milk","fat","emulsifier"]}}')
+    assert calc_score(testCompany, ["milk"]) == 5
+
+def test_calc_score_mult_ingredient_match():
+    testCompany = json.loads('{"products":{"cream":["milk","fat","emulsifier"],"anothercream":["milk","fat","emulsifier"]}}')
+    assert calc_score(testCompany, ["milk"]) == 10
 
 def test_calc_score_no_product():
     testCompany = {"labels": ["exists"]}
     assert calc_score(testCompany, ["exists"]) == 10
+
+def test_normalise_name_found_1():
+    testCompany = {"company_name": "exists"}
+    print(normalise_company(testCompany)['name'])    
+    assert normalise_company(testCompany)['name'] == "exists"
+
+def test_normalise_name_found_2():
+    testCompany = {"company": "exists"}    
+    assert normalise_company(testCompany)['name'] == "exists"
+
+def test_normalise_name_found_3():
+    testCompany = {"name": "exists"}    
+    assert normalise_company(testCompany)['name'] == "exists"
+
+def test_normalise_name_not_found():
+    testCompany = {"noname": "exists"}    
+    assert normalise_company(testCompany)['name'] == "unknown"

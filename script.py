@@ -6,29 +6,51 @@ with open('input/processed_buyer_leads.json', 'r') as inputFile:
 	inputData = json.load(inputFile)
 
 ## Normalise 
-def find_value(company, possible_keys):
+def find_value(company, possible_keys, default_value="unknown"):
 	for key in possible_keys:
 		if key in company.keys():
 			return company[key]
-	return "unknown"
+	return default_value
+
+def normalise_company(inputCompany):
+	company = {}
+	company['name'] 		= find_value(inputCompany, ['company_name', 'company', 'name'])
+	company['description'] 	= find_value(inputCompany, ['info', 'desc', 'description'])
+	company['labels'] 		= list(map(lambda label:label.strip(), find_value(inputCompany, ['labels', 'keywords', 'tags']).split(";")))
+	company['website'] 		= find_value(inputCompany, ['website', 'site', 'url'])
+	company['products'] 	= normalise_products(find_value(inputCompany, ['products', 'product_list', 'items'], []))
+	print(company)
+	return company
+
+def normalise_products(products):
+	output = {}
+	for product in products:
+		output[product["name"]] = find_value(product,['ingredients'],['unknown'])
+	return output
+
+
+def merge_companies(companyA, companyB):
+	# Merge and dedupe labels
+	companyA["labels"].extend(companyB["labels"])
+	companyA["labels"] = list(set(companyA["labels"]))
+
+	# Merge products
+	#companyA["products"].extend(companyB["products"])
+
+	return companyA
 
 companies = {}
 
 for inputCompany in inputData:
-	company = {}
-	company['name'] 			= find_value(inputCompany, ['company_name', 'company', 'name'])
-	company['description'] 		= find_value(inputCompany, ['info', 'desc', 'description'])
-	company['labels'] 			= list(map(lambda label:label.strip(), find_value(inputCompany, ['labels', 'keywords', 'tags']).split(";")))
-	company['website'] 			= find_value(inputCompany, ['website', 'site', 'url'])
-	company['products'] 		= find_value(inputCompany, ['products', 'product_list', 'items'])
+
+	company = normalise_company(inputCompany)
 
 	# Dedupe by company name, if multiple found labels & products are merged.
 	# Can cause issues with duplicate products
 	if company['name'] not in companies.keys():
 		companies[company['name']] = company
 	else:
-		companies[company['name']]["labels"].extend(company["labels"])
-		companies[company['name']]["products"].extend(company["products"])
+		companies[company['name']] = merge_companies(companies[company['name']], company)
 
 ## Score
 def calc_score(company, labels):
@@ -42,8 +64,7 @@ def calc_score(company, labels):
 	## Check ingredients, +5 for each
 	if "products" in company.keys():
 		for product in company['products']:
-			if "ingredients" in product.keys():
-				for ingredient in product["ingredients"]:
+				for ingredient in company['products'][product]:
 					if ingredient in label:
 						score += 5
 	return score
