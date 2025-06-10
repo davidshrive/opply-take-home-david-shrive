@@ -37,7 +37,8 @@ for inputCompany in inputData:
 		labels = inputCompany["keywords"]
 	elif "tags" in keys:
 		labels = inputCompany["tags"]
-	company["labels"] = list(map(lambda label:label.strip(), labels.split(";")))
+	labels = list(map(lambda label:label.strip(), labels.split(";")))
+	company["labels"] = labels
 
 	website = "unknown"
 	if "website" in keys:
@@ -59,12 +60,16 @@ for inputCompany in inputData:
 
 	# Lots of duplication here, can I add function?
 
-	# Dedupe by company name
-	companies[company["name"]] = company
+	# Dedupe by company name, if multiple found labels & products are merged.
+	# Can cause issues with duplicate products
+	if name not in companies.keys():
+		companies[name] = company
+	else:
+		companies[name]["labels"].extend(labels)
+		companies[name]["products"].extend(products)
 
 ## Score
 for companyName in companies:
-	print(companies[companyName])
 
 	score = 0
 	## Check labels, +10 for each
@@ -79,7 +84,6 @@ for companyName in companies:
 			for ingredient in product["ingredients"]:
 				if ingredient in label:
 					score += 5
-
-	print(score)
+	companies[companyName]['score'] = score
 
 ## Export
