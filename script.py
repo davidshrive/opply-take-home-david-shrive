@@ -87,3 +87,14 @@ for companyName in companies:
 	companies[companyName]['score'] = score
 
 ## Export
+with open("output/export.csv", "w") as outputFile:
+
+	# Write headers
+	writer = csv.DictWriter(outputFile, companies["Company 1"].keys())
+	writer.writeheader()
+
+	# Write data
+	for companyName in companies:
+		writer.writerow(companies[companyName])
+
+	# Bit messy atm, labels and products written as json
