@@ -1,11 +1,7 @@
 import json
 import csv
 
-## Load file
-with open('input/processed_buyer_leads.json', 'r') as inputFile:
-	inputData = json.load(inputFile)
-
-## Normalise 
+## Functions
 def find_value(company, possible_keys, default_value="unknown"):
 	for key in possible_keys:
 		if key in company.keys():
@@ -19,7 +15,6 @@ def normalise_company(inputCompany):
 	company['labels'] 		= list(map(lambda label:label.strip(), find_value(inputCompany, ['labels', 'keywords', 'tags']).split(";")))
 	company['website'] 		= find_value(inputCompany, ['website', 'site', 'url'])
 	company['products'] 	= normalise_products(find_value(inputCompany, ['products', 'product_list', 'items'], []))
-	print(company)
 	return company
 
 def normalise_products(products):
@@ -28,31 +23,19 @@ def normalise_products(products):
 		output[product["name"]] = find_value(product,['ingredients'],['unknown'])
 	return output
 
-
 def merge_companies(companyA, companyB):
 	# Merge and dedupe labels
-	companyA["labels"].extend(companyB["labels"])
-	companyA["labels"] = list(set(companyA["labels"]))
+	if "labels" in companyA.keys():
+		companyA["labels"].extend(companyB["labels"])
+		companyA["labels"] = list(set(companyA["labels"]))
 
-	# Merge products
-	#companyA["products"].extend(companyB["products"])
+	# Merge product ingredients and dedupe
+	for product in companyB["products"]:
+		companyA['products'][product].extend(companyB['products'][product])
+		companyA['products'][product] = list(set(companyA['products'][product]))
 
 	return companyA
 
-companies = {}
-
-for inputCompany in inputData:
-
-	company = normalise_company(inputCompany)
-
-	# Dedupe by company name, if multiple found labels & products are merged.
-	# Can cause issues with duplicate products
-	if company['name'] not in companies.keys():
-		companies[company['name']] = company
-	else:
-		companies[company['name']] = merge_companies(companies[company['name']], company)
-
-## Score
 def calc_score(company, labels):
 	score = 0
 	## Check labels, +10 for each
@@ -69,9 +52,27 @@ def calc_score(company, labels):
 						score += 5
 	return score
 
+
+
+## Load file
+with open('input/processed_buyer_leads.json', 'r') as inputFile:
+	inputData = json.load(inputFile)
+
+## Normalise
+companies = {}
+for inputCompany in inputData:
+
+	company = normalise_company(inputCompany)
+
+	# Dedupe by company name, if already exists companies are merged
+	if company['name'] not in companies.keys():
+		companies[company['name']] = company
+	else:
+		companies[company['name']] = merge_companies(companies[company['name']], company)
+
+## Score
 # These are the values we are looking for to increase a companies score
 labels = ['corn-starch','corn starch']
-
 for companyName in companies:
 	companies[companyName]['score'] = calc_score(companies[companyName],labels)
 

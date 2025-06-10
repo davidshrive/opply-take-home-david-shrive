@@ -53,3 +53,9 @@ def test_normalise_name_found_3():
 def test_normalise_name_not_found():
     testCompany = {"noname": "exists"}    
     assert normalise_company(testCompany)['name'] == "unknown"
+
+def test_merge_companies():
+    testCompany = json.loads('{"products":{"cream":["milk","fat"]}}')
+    testCompany2 = json.loads('{"products":{"cream":["fat","emulsifier"]}}')
+
+    assert set(merge_companies(testCompany, testCompany2)['products']['cream']) == set(['emulsifier', 'fat', 'milk'])
