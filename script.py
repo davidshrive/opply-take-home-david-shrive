@@ -35,15 +35,17 @@ def calc_score(company, labels):
 	score = 0
 	## Check labels, +10 for each
 	for label in labels:
-		if label in company['labels']:
-			score += 10
+		if "labels" in company.keys():
+			if label in company['labels']:
+				score += 10
 
 	## Check ingredients, +5 for each
-	for product in company['products']:
-		if "ingredients" in product.keys():
-			for ingredient in product["ingredients"]:
-				if ingredient in label:
-					score += 5
+	if "products" in company.keys():
+		for product in company['products']:
+			if "ingredients" in product.keys():
+				for ingredient in product["ingredients"]:
+					if ingredient in label:
+						score += 5
 	return score
 
 # These are the values we are looking for to increase a companies score
