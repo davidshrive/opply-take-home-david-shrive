@@ -62,8 +62,24 @@ for inputCompany in inputData:
 	# Dedupe by company name
 	companies[company["name"]] = company
 
-print(companies)
-
 ## Score
+for companyName in companies:
+	print(companies[companyName])
+
+	score = 0
+	## Check labels, +10 for each
+	labels = ['corn-starch', 'corn starch']
+	for label in labels:
+		if label in companies[companyName]['labels']:
+			score += 10
+
+	## Check ingredients, +5 for each
+	for product in companies[companyName]['products']:
+		if "ingredients" in product.keys():
+			for ingredient in product["ingredients"]:
+				if ingredient in label:
+					score += 5
+
+	print(score)
 
 ## Export
