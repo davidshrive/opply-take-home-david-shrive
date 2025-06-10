@@ -684,9 +684,9 @@
         "name": "pudding"
       },
       {
-        "name": "cake"
+        "name": "cake",
         "ingredients": [
-          "corn starch",
+          "corn starch"
         ]
       },
       {
@@ -877,5 +877,5 @@
         ]
       }
     ]
-  },
+  }
 ]
