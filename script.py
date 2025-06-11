@@ -50,8 +50,15 @@ def calc_score(company, labels):
 				for ingredient in company['products'][product]:
 					if ingredient in label:
 						score += 5
-	return score
+	
+	## Check description, +10 for each
+	if "description" in company.keys():
+		for label in labels:
+			print(company['description'])
+			if label in company['description']:
+				score += 10
 
+	return score
 
 
 ## Load file
@@ -72,7 +79,7 @@ for inputCompany in inputData:
 
 ## Score
 # These are the values we are looking for to increase a companies score
-labels = ['corn-starch','corn starch']
+labels = ['corn-starch','corn starch','corn','starch']
 for companyName in companies:
 	companies[companyName]['score'] = calc_score(companies[companyName],labels)
 

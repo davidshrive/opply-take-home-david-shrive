@@ -37,6 +37,18 @@ def test_calc_score_no_product():
     testCompany = {"labels": ["exists"]}
     assert calc_score(testCompany, ["exists"]) == 10
 
+def test_calc_score_description_full_match():
+    testCompany = {"description": "exists"}
+    assert calc_score(testCompany, ["exists"]) == 10
+
+def test_calc_score_description_partial_match():
+    testCompany = {"description": "blablaexists"}
+    assert calc_score(testCompany, ["exists"]) == 10
+
+def test_calc_score_description_not_match():
+    testCompany = {"description": "exists"}
+    assert calc_score(testCompany, ["not-exists"]) == 0
+
 def test_normalise_name_found_1():
     testCompany = {"company_name": "exists"}
     print(normalise_company(testCompany)['name'])    
@@ -57,5 +69,4 @@ def test_normalise_name_not_found():
 def test_merge_companies():
     testCompany = json.loads('{"products":{"cream":["milk","fat"]}}')
     testCompany2 = json.loads('{"products":{"cream":["fat","emulsifier"]}}')
-
     assert set(merge_companies(testCompany, testCompany2)['products']['cream']) == set(['emulsifier', 'fat', 'milk'])

@@ -8,17 +8,17 @@ Company 6,We produce cosmetics.,"['no additives', 'vegan']",,"{'cake': ['flour',
 Company 7,We produce dairy.,"['eco', 'vegan']",http://company7.com,"{'pudding': ['unknown'], 'biscuits': ['flour', 'butter', 'sugar'], 'cream': ['milk', 'fat', 'emulsifier']}",0
 Company 8,We produce pet food.,"['no additives', 'vegan']",http://company8.com,"{'cheese': ['milk', 'rennet', 'salt'], 'biscuits': ['unknown'], 'face powder': ['unknown']}",0
 Company 9,We produce software.,"['no additives', 'eco']",http://company9.com,"{'cheese': ['milk', 'rennet', 'salt'], 'face powder': ['talc', 'mica', 'zinc oxide'], 'cream': ['unknown']}",0
-Company 10,We produce dairy.,"['eco', 'vegan']",http://company10.com,"{'cream': ['milk', 'emulsifier', 'fat'], 'cheese': ['milk', 'salt', 'rennet'], 'chips': ['unknown']}",0
-Company 11,We produce sauces. Our products use starch. Our products use binder.,"['no additives', 'dessert']",http://company11.com,"{'cream': ['unknown'], 'biscuits': ['flour', 'butter', 'sugar'], 'cake': ['unknown']}",0
+Company 10,We produce dairy.,"['eco', 'vegan']",http://company10.com,"{'cream': ['milk', 'emulsifier', 'fat'], 'cheese': ['rennet', 'salt', 'milk'], 'chips': ['unknown']}",0
+Company 11,We produce sauces. Our products use starch. Our products use binder.,"['no additives', 'dessert']",http://company11.com,"{'cream': ['unknown'], 'biscuits': ['flour', 'butter', 'sugar'], 'cake': ['unknown']}",10
 Company 12,We produce cosmetics.,"['corn-starch', 'eco']",http://company12.com,"{'cream': ['unknown'], 'biscuits': ['unknown'], 'chips': ['unknown']}",10
 Company 13,We produce dairy. Our products use maize powder.,"['no additives', 'dessert']",,"{'face powder': ['unknown'], 'cream': ['milk', 'fat', 'emulsifier'], 'biscuits': ['unknown']}",0
 Company 14,We produce software.,"['no additives', 'dessert']",http://company14.com,"{'pudding': ['milk', 'sugar', 'gelatin'], 'face powder': ['unknown'], 'cheese': ['milk', 'rennet', 'salt']}",0
-Company 15,We produce natural snacks.,"['eco', 'eco, corn-starch', 'corn-starch']",http://company15.net,"{'face powder': ['unknown'], 'cake': ['unknown'], 'pudding': ['milk', 'gelatin', 'sugar']}",10
+Company 15,We produce natural snacks.,"['eco', 'eco, corn-starch', 'corn-starch']",http://company15.net,"{'face powder': ['unknown'], 'cake': ['unknown'], 'pudding': ['sugar', 'gelatin', 'milk']}",10
 Company 16,We produce cosmetics.,"['eco', 'corn-starch']",http://company16.com,"{'face powder': ['unknown'], 'cream': ['milk', 'fat', 'emulsifier'], 'biscuits': ['flour', 'butter', 'sugar']}",10
 Company 17,We produce bakery.,"['vegan', 'corn-starch']",http://company17.com,"{'face powder': ['talc', 'mica', 'zinc oxide'], 'pudding': ['unknown'], 'cake': ['unknown']}",10
 Company 18,We produce steel.,"['eco', 'dessert']",http://company18.com,"{'face powder': ['unknown'], 'cream': ['unknown'], 'chips': ['unknown']}",0
-Company 19,We produce sauces. Our products use binder. Our products use starch.,"['dessert', 'vegan']",http://company19.com,"{'face powder': ['unknown'], 'chips': ['unknown'], 'pudding': ['milk', 'sugar', 'gelatin']}",0
-Company 20,We produce bakery. Our products use binder. Our products use starch.,"['dessert', 'eco']",,"{'biscuits': ['unknown'], 'cake': ['unknown'], 'cream': ['unknown']}",0
+Company 19,We produce sauces. Our products use binder. Our products use starch.,"['dessert', 'vegan']",http://company19.com,"{'face powder': ['unknown'], 'chips': ['unknown'], 'pudding': ['milk', 'sugar', 'gelatin']}",10
+Company 20,We produce bakery. Our products use binder. Our products use starch.,"['dessert', 'eco']",,"{'biscuits': ['unknown'], 'cake': ['unknown'], 'cream': ['unknown']}",10
 Company 21,We produce dairy.,"['no additives', 'vegan']",https://company21.com,"{'chips': ['unknown'], 'pudding': ['milk', 'sugar', 'gelatin'], 'face powder': ['talc', 'mica', 'zinc oxide']}",0
 Company 22,We produce bakery. Our products use thickener. Our products use binder.,"['corn-starch', 'dessert']",http://company22.com,"{'face powder': ['unknown'], 'biscuits': ['flour', 'butter', 'sugar'], 'pudding': ['milk', 'sugar', 'gelatin']}",10
 Company 23,We produce bakery.,"['corn-starch', 'eco']",http://company23.com,"{'cheese': ['milk', 'rennet', 'salt'], 'chips': ['unknown'], 'cream': ['milk', 'fat', 'emulsifier']}",10
@@ -27,7 +27,7 @@ Company 25,We produce cosmetics.,"['no additives', 'eco']",,"{'face powder': ['u
 Company 26,We produce steel.,"['corn-starch', 'dessert']",http://company26.com,"{'pudding': ['milk', 'sugar', 'gelatin'], 'face powder': ['talc', 'mica', 'zinc oxide'], 'cake': ['unknown']}",10
 Company 27,We produce cosmetics.,"['eco', 'no additives']",,"{'chips': ['potatoes', 'oil', 'salt'], 'cream': ['milk', 'fat', 'emulsifier'], 'cake': ['flour', 'sugar', 'eggs']}",0
 Company 28,We produce pet food.,"['eco', 'corn-starch']",http://company28.com,"{'chips': ['unknown'], 'cheese': ['milk', 'rennet', 'salt'], 'pudding': ['milk', 'sugar', 'gelatin']}",10
-Company 29,We produce everyday snacks.,"['unknown', 'eco', 'corn-starch']",,"{'pudding': ['unknown'], 'cake': ['unknown', 'corn starch'], 'cheese': ['milk', 'salt', 'rennet']}",15
+Company 29,We produce everyday snacks.,"['eco', 'unknown', 'corn-starch']",,"{'pudding': ['unknown'], 'cake': ['corn starch', 'unknown'], 'cheese': ['rennet', 'salt', 'milk']}",10
 Company 30,We produce cosmetics. Our products use thickener. Our products use maize powder.,"['corn-starch', 'vegan']",http://company30.com,"{'cake': ['flour', 'sugar', 'eggs'], 'cheese': ['milk', 'rennet', 'salt'], 'cream': ['unknown']}",10
 Company 50,We produce dairy.,"['no additives', 'vegan']",https://company21.com,"{'chips': ['unknown'], 'pudding': ['milk', 'sugar', 'gelatin'], 'face powder': ['talc', 'mica', 'zinc oxide']}",0
 Company 52,We produce bakery. Our products use thickener.,"['corn-starch', 'dessert']",http://company22.com,"{'face powder': ['unknown'], 'biscuits': ['flour', 'butter', 'sugar'], 'pudding': ['milk', 'sugar', 'gelatin']}",10
