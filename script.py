@@ -39,8 +39,8 @@ def merge_companies(companyA, companyB):
 def calc_score(company, labels):
 	score = 0
 	## Check labels, +10 for each
-	for label in labels:
-		if "labels" in company.keys():
+	if "labels" in company.keys():
+		for label in labels:
 			if label in company['labels']:
 				score += 10
 
@@ -48,13 +48,12 @@ def calc_score(company, labels):
 	if "products" in company.keys():
 		for product in company['products']:
 				for ingredient in company['products'][product]:
-					if ingredient in label:
+					if ingredient in labels:
 						score += 5
 	
 	## Check description, +10 for each
 	if "description" in company.keys():
 		for label in labels:
-			print(company['description'])
 			if label in company['description']:
 				score += 10
 
